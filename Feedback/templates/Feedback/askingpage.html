@@ -46,11 +46,9 @@
                   </div>
                   <form  class="user" >
                     
-                   <a href="http://127.0.0.1:8000/Feedback/patientINfeedback/" class="btn btn-primary btn-user btn-block" >IN Patient</a>
-                   <a href="http://127.0.0.1:8000/Feedback/patientfeedback/" class="btn btn-primary btn-user btn-block">OUT Patient</a>
+                   <a href="{% url 'patientINfeedback' %}" class="btn btn-primary btn-user btn-block" >IN Patient</a>
+                   <a href="{% url 'patientfeedback' %}" class="btn btn-primary btn-user btn-block">OUT Patient</a>
 
-                        
-                
                   </form>
                   <hr>
                   

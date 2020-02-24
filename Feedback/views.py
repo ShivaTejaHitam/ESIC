@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import PatientCreationForm,PatientUpdationForm,AdminCreationForm,UserLoginForm,INPatientUpdationForm,OTPVerifyForm
+from .forms import PatientCreationForm,PatientUpdationForm,UserLoginForm,INPatientUpdationForm,OTPVerifyForm
 from . models import Patient,HOD,PatientIN,Minister
 from django.http import HttpResponseRedirect,HttpResponse
 from django.urls import reverse
@@ -8,31 +8,38 @@ import math,random
 #from django.generic.views import CreateView
 from django.views.generic import View
 
-
-
 def homepage(request):
-<<<<<<< HEAD
     totalfeedbacks=(len(Patient.objects.all())+len(PatientIN.objects.all()))
     solvedissues=(len(Patient.objects.filter(Status="1"))+len(PatientIN.objects.filter(Status="1")))  
-    unsolvedissues=(len(Patient.objects.filter(Status="3"))+len(PatientIN.objects.filter(Status="3")))
+    unsolvedissues=(len(Patient.objects.filter(Status="-1"))+len(PatientIN.objects.filter(Status="-1")))
     pendingissues=totalfeedbacks-solvedissues-unsolvedissues
-    return render(request,'Feedback/index2.html',{'totalfeedbacks':totalfeedbacks,'solvedissues':solvedissues,'pendingissues':pendingissues,'unsolvedissues':unsolvedissues})
-=======
-    return render(request,'Feedback/index2.html')
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
+    if request.session.get('user_session',None):
+        currentuser=request.session['user_session']
+        return render(request,'Feedback/index2.html',{'currentuser':currentuser,'totalfeedbacks':totalfeedbacks,'solvedissues':solvedissues,'pendingissues':pendingissues,'unsolvedissues':unsolvedissues})
+    return render(request,'Feedback/index.html',{'totalfeedbacks':totalfeedbacks,'solvedissues':solvedissues,'pendingissues':pendingissues,'unsolvedissues':unsolvedissues})
+
+def details(request,patient_id):
+    req=Patient.objects.filter(id=patient_id)
+    currentuser=request.session['user_session']
+    return render(request,'Feedback/details.html',{'req':req,'currentuser':currentuser})
 
 
+def detailsIN(request,patient_id):
+    req=PatientIN.objects.filter(id=patient_id)
+    currentuser=request.session['user_session']
+    return render(request,'Feedback/details.html',{'req':req,'currentuser':currentuser})
 
 def patientcomplaints(request):
     if request.session.get('user_session',None):
         currentuser=request.session['user_session']
         in_Minister=Minister.objects.filter(email=currentuser)
         in_HOD=HOD.objects.filter(email=currentuser)
+        currentuser=request.session['user_session']
         if in_Minister.exists():
             patientlist=Patient.objects.filter(Status="2")
         elif in_HOD.exists():
             patientlist=Patient.objects.filter(Status="0")
-        return render(request,"Feedback/OUTPatientdash.html",{'patientlist':patientlist})
+        return render(request,"Feedback/OUTPatientdash.html",{'patientlist':patientlist,'currentuser':currentuser})
     else:
         return render(request,"Feedback/login.html")
 
@@ -41,98 +48,77 @@ def patientINcomplaints(request):
         currentuser=request.session['user_session']
         in_Minister=Minister.objects.filter(email=currentuser)
         in_HOD=HOD.objects.filter(email=currentuser)
+        currentuser=request.session['user_session']
         if(in_Minister.exists()):
             patientlist=PatientIN.objects.filter(Status="2")
         elif(in_HOD.exists()):
-            patientlist=PatientIN.objects.filter(Status="0")
-        
-        return render(request,"Feedback/INPatientdash.html",{'patientlist':patientlist})
+            patientlist=PatientIN.objects.filter(Status="0")  
+        return render(request,"Feedback/INPatientdash.html",{'patientlist':patientlist,'currentuser':currentuser})
     else:
         return render(request,"Feedback/login.html")
 
 def change(request,patient_id):
-    patient_el=Patient.objects.get(mobile_number=patient_id)
+    patient_el=Patient.objects.get(id=patient_id)
     patient_el.Status="1"
     patient_el.save()
     return HttpResponseRedirect(reverse('patientcomplaints'))
 
 def change2(request,patient_id):
-    patient_el=PatientIN.objects.get(mobile_number=patient_id)
+    patient_el=PatientIN.objects.get(id=patient_id)
     patient_el.Status="1"
     patient_el.save()
     return HttpResponseRedirect(reverse('patientINcomplaints'))
 
 
-def forward(request,patient_id):
-    patient_el=Patient.objects.get(mobile_number=patient_id)
-    patient_el.Status="2"
-    patient_el.save()
+def forward(request,pat_id):
+    patient_el=Patient.objects.get(id=pat_id)
+    currentuser=request.session['user_session']
+    in_HOD=HOD.objects.filter(email=currentuser)
+    in_Minister=Minister.objects.filter(email=currentuser)
+    if in_HOD.exists():
+        patient_el.Status="2"
+        patient_el.save()
+    elif in_Minister.exists():
+        patient_el.Status="-1"
+        patient_el.save()
     return HttpResponseRedirect(reverse('patientcomplaints'))
 
-def forward2(request,patient_id):
-    patient_el=PatientIN.objects.get(mobile_number=patient_id)
-    patient_el.Status="2"
-    patient_el.save()
+
+def forward2(request,pat_id):
+    patient_el=PatientIN.objects.get(id=pat_id)
+    currentuser=request.session['user_session']
+    in_HOD=HOD.objects.filter(email=currentuser)
+    in_Minister=Minister.objects.filter(email=currentuser)
+    if in_HOD.exists():
+        patient_el.Status="2"
+        patient_el.save()
+    elif in_Minister.exists():
+        patient_el.Status="-1"
+        patient_el.save()
     return HttpResponseRedirect(reverse('patientINcomplaints'))
 
-
-
 def dashboard(request):
-    values=len(Patient.objects.filter(AreaofIssue="hygiene"))
-    values1=len(Patient.objects.filter(AreaofIssue="doctor"))
-    values2=len(Patient.objects.filter(AreaofIssue="waiting"))
-    values3=len(Patient.objects.filter(AreaofIssue="pharmacy"))
-    values4=len(Patient.objects.filter(AreaofIssue="nurse"))
-    values5=len(PatientIN.objects.filter(AreaofIssue="admission"))
-    values6=len(PatientIN.objects.filter(AreaofIssue="nurse"))
-    values7=len(PatientIN.objects.filter(AreaofIssue="doctor"))
-    values8=len(PatientIN.objects.filter(AreaofIssue="allot"))
-    values9=len(PatientIN.objects.filter(AreaofIssue="discharge"))
-    return render(request,'Feedback/dashboard.html',{'values':values,'values1':values1,'values2':values2,'values3':values3,'values4':values4,'values5':values5,'values6':values6,'values7':values7,'values8':values8,'values9':values})
+    if request.session.get('user_session',None):
+        values=len(Patient.objects.filter(AreaofIssue="hygiene"))
+        values1=len(Patient.objects.filter(AreaofIssue="doctor"))
+        values2=len(Patient.objects.filter(AreaofIssue="waiting"))
+        values3=len(Patient.objects.filter(AreaofIssue="pharmacy"))
+        values4=len(Patient.objects.filter(AreaofIssue="nurse"))
+        values5=len(PatientIN.objects.filter(AreaofIssue="admission"))
+        values6=len(PatientIN.objects.filter(AreaofIssue="nurse"))
+        values7=len(PatientIN.objects.filter(AreaofIssue="doctor"))
+        values8=len(PatientIN.objects.filter(AreaofIssue="allot"))
+        values9=len(PatientIN.objects.filter(AreaofIssue="discharge"))
+        currentuser=request.session['user_session']
+        return render(request,'Feedback/dashboard.html',{'currentuser':currentuser,'values':values,'values1':values1,'values2':values2,'values3':values3,'values4':values4,'values5':values5,'values6':values6,'values7':values7,'values8':values8,'values9':values})
+    else:
+        return render(request,'Feedback/login.html')
 
 
 def thankyou(request):
     return render(request,'Feedback/thankyou.html')
 
-def addHOD(request):
-    if request.method=='POST':
-        form=AdminCreationForm(request.POST)
-        if form.is_valid():
-            hod_email=form.cleaned_data['email']
-            passwd=form.cleaned_data['password']
-            record=HOD(email=hod_email,password=passwd)
-            record.save()
-            return HttpResponseRedirect(reverse('login'))         
-        else:
-            field_error="Please Check Your Fields"
-            return render(request,'Feedback/HODSignUp.html',{'form':form,'field_error':field_error})
-    else:
-        form=AdminCreationForm()
-    return render(request,'Feedback/HODSignUp.html',{'form':form})
-
-
-
-def addMinister(request):
-    if request.method=='POST':
-        form=AdminCreationForm(request.POST)
-        if form.is_valid():
-            minister_email=form.cleaned_data['email']
-            passwd=form.cleaned_data['password']
-            record=Minister(email=minister_email,password=passwd)
-            record.save()
-            return HttpResponseRedirect(reverse('login'))         
-        else:
-            field_error="Please Check Your Fields"
-            return render(request,'Feedback/MinisterSignUp.html',{'form':form,'field_error':field_error})
-    else:
-        form=AdminCreationForm()
-    return render(request,'Feedback/MinisterSignUp.html',{'form':form})
-
-<<<<<<< HEAD
 def login(request): 
-=======
-def login(request):
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
     if request.method=='POST':
         form=UserLoginForm(request.POST)
         if form.is_valid():
@@ -147,7 +133,7 @@ def login(request):
                 request.session['user_session']=input_email
                 return HttpResponseRedirect(reverse('dashboard'))
             else:
-                no_account="Your account does not exists"
+                no_account="Invalid Employee ID or Password"
                 return render(request,'Feedback/login.html',{'form':form,'no_account':no_account})         
         else:
             field_error="Invalid Fields"
@@ -161,8 +147,8 @@ def login(request):
 def askingpage(request):
     return render(request,"Feedback/askingpage.html")
 
-def adminaskingpage(request):
-    return render(request,"Feedback/adminaskingpage.html")
+'''def adminaskingpage(request):
+    return render(request,"Feedback/adminaskingpage.html")'''
 
 def patientfeedback(request):
     if request.method=='POST':
@@ -173,26 +159,11 @@ def patientfeedback(request):
             for i in range(4) : 
                 OTPcode += digits[math.floor(random.random() * 10)]
             user=form.cleaned_data['mobile_number']
-<<<<<<< HEAD
             ip=form.cleaned_data['ip_number']
-            request.session['user_session']=user
-            currentuser=request.session['user_session']
+            request.session['patient_session']=user
+            currentuser=request.session['patient_session']
             record=Patient(mobile_number=user,otp=OTPcode,ip_number=ip)
             record.save()   
-=======
-            request.session['user_session']=user
-            currentuser=request.session['user_session']
-            checksOUT=Patient.objects.filter(mobile_number=currentuser)
-            checksIN=PatientIN.objects.filter(mobile_number=currentuser)
-            if checksOUT.exists():
-                had_error="You have already submitted the feedback"
-                return render(request,'Feedback/feedbackstart.html',{'form':form,'had_error':had_error})
-            elif checksIN.exists():
-                had_error="You have already submitted the feedback"
-                return render(request,'Feedback/feedbackstart.html',{'form':form,'had_error':had_error})
-            record=Patient(mobile_number=user,otp=OTPcode)
-            record.save()
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
             send_mail('OTP for ESIC',
             'Your One Time Password is'+OTPcode,
             '',
@@ -214,16 +185,9 @@ def patientINfeedback(request):
             for i in range(4): 
                 OTPcode += digits[math.floor(random.random() * 10)]
             user=form.cleaned_data['mobile_number']
-            request.session['user_session']=user
-            currentuser=request.session['user_session']
-            checksOUT=Patient.objects.filter(mobile_number=currentuser)
-            checksIN=PatientIN.objects.filter(mobile_number=currentuser)
-            if checksOUT.exists():
-                had_error="You have already submitted the feedback"
-                return render(request,'Feedback/feedbackinstart.html',{'form':form,'had_error':had_error})
-            elif checksIN.exists():
-                had_error="You have already submitted the feedback"
-                return render(request,'Feedback/feedbackinstart.html',{'form':form,'had_error':had_error})
+            request.session['patient_session']=user
+            currentuser=request.session['patient_session']
+            
             record=PatientIN(mobile_number=user,otp=OTPcode)
             record.save()
             send_mail('OTP for ESIC',
@@ -245,12 +209,14 @@ def verifyotp(request):
         form=OTPVerifyForm(request.POST)
         if form.is_valid():
             otpsubm=form.cleaned_data['otp']
-            currentuser=request.session['user_session']
+            currentuser=request.session['patient_session']
             actual=Patient.objects.filter(mobile_number=currentuser,otp=otpsubm)
             actualin=PatientIN.objects.filter(mobile_number=currentuser,otp=otpsubm)
             if actual.exists():
+                actual=Patient.objects.filter(mobile_number=currentuser,otp=otpsubm).update(otp=None)               
                 return HttpResponseRedirect(reverse('Feedbackform'))
             elif actualin.exists():
+                actualin=Patient.objects.filter(mobile_number=currentuser,otp=otpsubm).update(otp=None)               
                 return HttpResponseRedirect(reverse('IPDFeedbackForm'))
             else:
                 error_msg="Incorrect OTP"
@@ -279,10 +245,10 @@ def IPDFeedbackForm(request):
             allotis=form.cleaned_data['AllotmentIssue']
             disch=form.cleaned_data['DischargeIssue']
             Explanation=form.cleaned_data['explanation']
-            currentuser=request.session['user_session']
+            currentuser=request.session['patient_session']
             record=PatientIN.objects.filter(mobile_number=currentuser).update(Rating=rating,sandf=SorF,department=Dep,AreaofIssue=aoi,AdmissionIssue=admis,NurseIssue=nursis,DoctorIssue=doctis,AllotmentIssue=allotis,DischargeIssue=disch,explanation=Explanation)
             try:
-                del request.session['user_session']
+                del request.session['patient_session']
             except KeyError:    
                 pass
             return HttpResponseRedirect(reverse('thankyou'))         
@@ -311,11 +277,11 @@ def Feedbackform(request):
             phar=form.cleaned_data['Pharmacy']
             nurse=form.cleaned_data['Nurse']
             Explanation=form.cleaned_data['explanation']
-            currentuser=request.session['user_session']
+            currentuser=request.session['patient_session']
             record=Patient.objects.filter(mobile_number=currentuser).update(Rating=rating,sandf=SorF,department=Dep,AreaofIssue=aoi,Hygiene=hyg,DoctorBehaviour=docb,WaitingTime=waT,Pharmacy=phar,Nurse=nurse,explanation=Explanation)
             
             try:
-                del request.session['user_session']
+                del request.session['patient_session']
             except KeyError:
                 pass
             return HttpResponseRedirect(reverse('thankyou'))         
@@ -338,7 +304,7 @@ def logout(request):
         del request.session['user_session']
     except KeyError:
         pass
-    return HttpResponseRedirect(reverse('login'))
+    return HttpResponseRedirect(reverse('homepage'))
 
 
 

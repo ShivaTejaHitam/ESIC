@@ -30,7 +30,7 @@ NORECAPTCHA_WIDGET_TEMPLATE = 'nocaptcha_recaptcha/widget.html'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.20.128','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.20.128','127.0.0.1','0.0.0.0']
 
 
 # Application definition
@@ -124,7 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = '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'
 EMAIL_HOST_USER = 'apikey'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.sendgrid.net'

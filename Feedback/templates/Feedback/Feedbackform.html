@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Feedback Form</title>
+  <title>OP Feedback Form</title>
 
   <!-- Custom fonts for this template-->
   {% load static %}
@@ -72,6 +72,7 @@
                     <label><input type="radio" id="id_Rating" name="Rating" value="good" onchange="displaynext(this.value)" />Bad</label>
                     <br>
                     <label><input type="radio" id="id_Rating" name="Rating" value="good"onchange="displaynext(this.value)" />Worst</label>
+
                   <div id="goodsomething" style="display:none;">
                       &nbsp;&nbsp;&nbsp;&nbsp;Please Specify the area where you faced the issue
                       <br>
@@ -80,17 +81,10 @@
     
                       <div id="hygienediv" style="display: none;">
                      <br>     
-<<<<<<< HEAD
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Hygiene" name="Hygiene"  value="No proper Explanation of admission procedure." />No proper Explanation of admission procedure.
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Hygiene" name="Hygiene"  value="Corridors are not being cleaned" />Corridors are not being cleaned
                      </label>
                      <br>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Hygiene" name="Hygiene"  value="No proper Hospitality." />No proper Hospitality.</label>
-=======
-                     &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Hygiene" name="Hygiene"  value="1" />No proper Explanation of admission procedure.
-                     </label>
-                     <br>
-                      &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Hygiene" name="Hygiene"  value="2" />No proper Hospitality.</label>
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Hygiene" name="Hygiene"  value="Syringes are reused" />Syringes are reused</label>
                       
                      </div>
                     <hr style="width=3px;height=3px;"></hr>
@@ -105,17 +99,10 @@
     
                      <div id="doctordiv" style="display: none;">
                      <br>     
-<<<<<<< HEAD
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_DoctorBehaviour" name="DoctorBehavior"  value="No proper Response / Attentiveness to your queries/questions"/>No proper Response / Attentiveness to your queries/questions</label>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_DoctorBehaviour" name="DoctorBehavior"  value="No proper Response / Attentiveness to your queries/questions"/>No proper Response / excessive mobile usage</label>
                      
                      <br>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_DoctorBehaviour" name="DoctorBehaviour"  value="No Timely Medication and Care" />No Timely Medication and Care</label> 
-=======
-                     &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_DoctorBehaviour" name="DoctorBehavior"  value="1"/>No proper Response / Attentiveness to your queries/questions</label>
-                     
-                     <br>
-                     &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_DoctorBehaviour" name="DoctorBehaviour"  value="2" />No Timely Medication and Care</label> 
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_DoctorBehaviour" name="DoctorBehaviour"  value="Not available in time" />Not available in time</label> 
                     </div>
                      <hr style="width=3px;height=3px;"></hr>
                   <!--nursediv ends-->  
@@ -126,19 +113,11 @@
     
                       <div id="waitingdiv" style="display: none">
                       <br>
-<<<<<<< HEAD
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="No Proper Explanation and condition of treatment"/>No Proper Explanation and condition of treatment</label>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="Waiting for a doctor"/>Waiting for a doctor</label>
                      <br>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="Doctor behavior is not Polite,Friendly"/>Doctor behavior is not Polite,Friendly</label>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="waiting at pharmacy"/>waiting at pharmacy</label>
                      <br>
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="Doctor not available" />Doctor not available</label>
-=======
-                      &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="1"/>No Proper Explanation and condition of treatment</label>
-                     <br>
-                     &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="2"/>Doctor behavior is not Polite,Friendly</label>
-                     <br>
-                      &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="3" />Doctor not available</label>
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_WaitingTime" name="WaitingTime"  value="waiting at reception" />waiting at reception</label>
                      <br>
                    </div>
                     <hr style="width=3px;height=3px;"></hr>
@@ -151,19 +130,11 @@
                       </label><br>
                       <br>
                        <div id="pharmacydiv" style="display: none">
-<<<<<<< HEAD
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="No proper Allotment of room" />No proper Allotment of room</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="Medicines are not available in pharmacy" />Medicines are not available</label>
                        <br>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="No proper Allotment of Beds" />No proper Allotment of Beds</label>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="Medicines are expired" />Medicines are expired</label>
                        <br>
-                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="No proper Maintainance of Washrooms." />No proper Maintainance of Washrooms.</label>                    
-=======
-                       &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="1" />No proper Allotment of room</label>
-                       <br>
-                       &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="2" />No proper Allotment of Beds</label>
-                       <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="3" />No proper Maintainance of Washrooms.</label>                    
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Pharmacy" name="Pharmacy"  value="Quality of Medicines" />Quality of Medicines</label>                    
                      <br>
                    </div>
                     <hr style="width=3px;height=3px;"></hr>
@@ -175,44 +146,25 @@
                         </label>
                         <br><br>
                          <div id="nursediv" style="display: none">
-<<<<<<< HEAD
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Nurse" name="Nurse"  value="no clear instruction of medication" />no clear instruction of medication</label>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Nurse" name="Nurse"  value="Not Providing Medication in time" />Not providing medication in time</label>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Nurse" name="Nurse"  value="delay in discharge process" />delay in discharge process </label>
-=======
-                           &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Nurse" name="Nurse"  value="1" />no clear instruction of medication</label>
-                        <br>
-                         &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Nurse" name="Nurse"  value="2" />delay in discharge process </label>
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label><input type="checkbox" id="id_Nurse" name="Nurse"  value="Harsh Behaviour towards Patient/ Patient's family" />Harsh behaviour towards patient </label>
                       <!--dischargediv ends-->
-                    </div>
+                    </div></div>
                      <hr style="width=3px;height=3px;"></hr>
-                       <div id="Input" style="display:none;">
+                      <div id="Input" style="display:none;">
                       &nbsp;&nbsp;&nbsp;&nbsp;Please Explain your issue Briefly
                       <br>
                       <br>
-<<<<<<< HEAD
                       &nbsp;&nbsp;&nbsp;&nbsp;<label><textarea rows=3 cols=35 id="id_explanation" name="explanation" placeholder="Enter Here" ></textarea></label>  
-                      </div>
-                     <br/><br>
-                     
-=======
-                      &nbsp;&nbsp;&nbsp;&nbsp;<label><input type="text" id="id_explanation" name="explanation" placeholder="Enter Here" /></label>  
-                      </div>
-                     <br/><br/>
-                     <strong>Upload a recording</strong>
-                     <br><br>
-                     <input type="file" id="id_voice_record" name="voice_record"  accept="audio/mpeg">
-                     <br>
-                      <br>
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
-                     <button type="submit" class="btn btn-primary btn-user btn-block">
-                      Submit
-                    </button>
-                  
+                    </div>
+                    <div id="submit" style="display:none;">
+                      <br><br>
+                      <button type="submit" class="btn btn-primary btn-user btn-block">
+                        Submit
+                      </button>
+                    </div>   
                   </form>
-
-
                   <hr>
                   
                 </div>
@@ -229,36 +181,29 @@
   
 
   <script>
-    function displaynext(answer)
+
+function displaynext(answer)
    {
-<<<<<<< HEAD
+    document.getElementById('goodsomething').style.display = "block";
     document.getElementById('Input').style.display = "block";
-=======
- 
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
-   document.getElementById(answer + 'something').style.display = "block";
+    document.getElementById('submit').style.display = "block";
+
      if (answer == "excellent")
      { 
-       document.getElementById('good').style.display = "none";
+      document.getElementById('submit').style.display = "block";
+      document.getElementById('Input').style.display = "none";
+      document.getElementById('goodsomething').style.display = "none";
+
      }
  
-   }
+}
    
-<<<<<<< HEAD
-   
-=======
-   function displayArea(answer) 
-   {
-     document.getElementById('Input').style.display = "block";
-  
-   }  
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
   function displayAdmission(answer) 
    {
  
      document.getElementById(answer+"div").style.display = "block";
  
- }
+   }
  function displayNurse(answer) 
    {
  

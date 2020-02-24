@@ -9,14 +9,34 @@
   <meta name="description" content="">
   <meta name="author" content="">
   
-
   <title>
     {% block title %}
+    Feedback
     {% endblock %}
   </title>
-  
+  <style>
+    * {box-sizing: border-box}
+    
+    .container {
+      width: 19%;
+      background-color: #ddd;
+    }
+    
+    .skills {
+      text-align: right;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: white;
+    }
+    
+    .html {width: 90%; background-color: #4CAF50;}
+    .css {width: 80%; background-color: #2196F3;}
+    .js {width: 65%; background-color: #f44336;}
+    .php {width: 60%; background-color: #808080;}
+    </style>
   <!-- Custom fonts for this template-->
 {% load static %}
+
   <link href="{% static 'Feedback/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -36,13 +56,11 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'homepage' %}">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://127.0.0.1:8000/Feedback/">
         <div class="sidebar-brand-icon rotate-n-15">
           <!--<i class="fas fa-code"></i>-->
         </div>
-        <div class="sidebar-brand-text mx-3">
-          Santhust IP</div>
-        
+        <div class="sidebar-brand-text mx-3">Santhust IP<sup></sup></div>
       </a>
 
       <!-- Divider -->
@@ -50,37 +68,28 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'dashboard' %}">
+        <a class="nav-link" href="http://127.0.0.1:8000/Feedback/admindashboard/">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
 
-      <!-- Divider 
-      <hr class="sidebar-divider">
-
-       Heading 
-      <div class="sidebar-heading">
-        Interface
-      </div>
-
-       Nav Item - Pages Collapse Menu -->
+     
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'patientcomplaints' %}">
+        <a class="nav-link" href="http://127.0.0.1:8000/Feedback/patientcomplaints/">
           <i class="fa fa-list-ul"></i>
-          <span>OP Issues</span>
+          <span>Out Patients</span>
         </a>
        
       </li>
 
        <!--Nav Item - Utilities Collapse Menu--> 
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'patientINcomplaints' %}" >
+        <a class="nav-link" href="http://127.0.0.1:8000/Feedback/patientINcomplaints/" >
           <i class="fa fa-list-ul"></i>
-          <span>IP Issues</span>
+          <span>In patients</span>
         </a>
         
       </li>
-
 
      <!--  Nav Item - Tables -->
       <li class="nav-item">
@@ -107,11 +116,22 @@
       <div id="content">
       <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+  
   <!-- Sidebar Toggle (Topbar) -->
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
     <i class="fa fa-bars"></i>
   </button>
+
+
+  <!--<div class="nav-item dropdown no-arrow">
+    <br>
+      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="img-profile rounded-circle" src="{% static 'Feedback/img/eisc1.png' %}">
+        &nbsp;&nbsp;&nbsp;<h1 class="h3 mb-0 text-gray-800">Santusht IP</h1>
+      </a>    
+      <br>        
+  </div> -->
+  
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
@@ -121,7 +141,7 @@
     <!-- Nav Item - User Information -->
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span style="color: gray;">{{ currentuser }}</span>
+        {{ currentuser }}
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -138,7 +158,7 @@
           Activity Log
         </a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{% url 'logout' %}" data-toggle="modal" data-target="#logoutModal">
+        <a class="dropdown-item" href="http://127.0.0.1:8000/Feedback/logout/" data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
           Logout
         </a>
@@ -149,10 +169,38 @@
 
 </nav>
 <!-- End of Topbar -->
-{% block body %}
-{% endblock %}
 
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class= "d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Visualization</h1>
+  <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
+    </div>
+    <!-- Content Row -->
+
+    <div class="row">
+      
+            
+          
+          
+          <!-- Card Body -->
+          {% load static %}
+          <br>
+          <div class="card-body" >
+            <div id="piechart"></div>
+          </div>
+
+          <div class="card-body" >
+            <div id="piechart2"></div>
+          </div>
         </div>
+        
+      </div>
+
+
+    </div>
         <!-- End of Main content-->
 
       
@@ -180,7 +228,7 @@
         </div>
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-header">
-          <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+          <a class="btn btn-primary" href="http://127.0.0.1:8000/Feedback/logout/">Logout</a>
         </div>
       </div>
     </div>
@@ -203,9 +251,7 @@
   <!-- Page level custom scripts -->
   <script src="{% static 'Feedback/js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'Feedback/js/demo/datatables-demo.js' %}"></script>
-  <script src="{% static 'Feedback/js/demo/chart-bar-demo.js' %}"></script>
-
-  <!--  For Visualisation Charts -->
+  <!--<script src="{% static 'Feedback/js/demo/chart-bar-demo.js' %}"></script>-->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     // Load google charts
@@ -222,9 +268,10 @@
       ['Nurse', {{ values3 }}],
       ['WaitingTime', {{ values4 }}]
     ]);
-
+    
       // Optional; add a title and set the width and height of the chart
       var options = {'title':'No of complaints(OUT patients)', 'width':550, 'height':400};
+    
       // Display the chart inside the <div> element with id="piechart"
       var chart = new google.visualization.PieChart(document.getElementById('piechart'));
       chart.draw(data, options);
@@ -254,7 +301,6 @@
     chart.draw(data, options);
   }
   </script>
-  
 
 </body>
 

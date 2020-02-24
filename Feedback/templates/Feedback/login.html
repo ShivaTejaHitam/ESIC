@@ -35,7 +35,7 @@
             <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-6 d-none d-lg-block bg-lgin-image">
-                <div align="center" style="padding-top:20px;">
+                <div align="center" style="padding-top:60px;">
                 <img src="{% static 'Feedback/img/ESIC.png' %}">
               </div>
               </div>
@@ -43,17 +43,13 @@
                 <div class="p-5">
                   <div class="text-center">
                     <p style="color: red;">{{ no_account }}</p>
-                    <h1 class="h4 text-gray-900 mb-4">Login to Proceed</h1>
+                    <h1 class="h4 text-gray-900 mb-4"> Admin Login</h1>
                   </div>
                   <form action="" class="user" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <p style="color:red;">{{ field_errors }}</p>
                     <div class="form-group">
-<<<<<<< HEAD
                       <input id="id_email" class="form-control form-control-user" type="email"  name="email"  required placeholder="Enter Your Employee ID">
-=======
-                      <input id="id_email" class="form-control form-control-user" type="email"  name="email"  required placeholder="Enter Your Email">
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
                     </div>
                     <div class="form-group">
                       <input type="password" name="password" class="form-control form-control-user" id="id_password" required placeholder="Enter your Password">
@@ -61,21 +57,21 @@
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                       Submit
                     </button>
+                    <hr>
+                  <div>
+                  <a href="{% url 'homepage' %}" class="btn btn-primary btn-user btn-block">
+                    Go to Homepage
+                  </a>
+                </div>
                   
                   </form>
-                  <hr>
+                  
                   <div class="text-center">
                     <a class="small" href="#">Forgot Password?</a>
                   </div>
-<<<<<<< HEAD
                   <!--<div class="text-center">
                     <a class="small" href="#">Create an Account!</a>
                   </div>-->
-=======
-                  <div class="text-center">
-                    <a class="small" href="#">Create an Account!</a>
-                  </div>
->>>>>>> 01b223460a761091531d1b4af2d88e5599152d32
                 </div>
               </div>
             </div>

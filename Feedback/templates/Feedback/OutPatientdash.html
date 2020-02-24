@@ -7,7 +7,7 @@ OUTPatient Issues
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Unsolved Out Patient Issues</h1>
+    <h1 class="h3 mb-2 text-gray-800">Unsolved OUT Patient Issues</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -19,22 +19,24 @@ OUTPatient Issues
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Patient Email ID</th>
+                <th>IP Number</th>
                 <th>Rating</th>
                 <th>Self/Family</th>
                 <th>Department</th>
                 <th>Issue In</th>
+                <th>View</th>
                 <th>Click If Solved</th>  
                 <th>Click to forward</th>             
               </tr>
             </thead>
             <tfoot>
               <tr>
-                <th>Patient Email ID</th>
+                <th>IP Number</th>
                 <th>Rating</th>
                 <th>Self/Family</th>
                 <th>Department</th>
                 <th>Issue In</th>
+                <th>View</th>
                 <th>Click If Solved</th>
                 <th>Click to forward</th>
                 
@@ -44,13 +46,21 @@ OUTPatient Issues
             
              {% for patient in patientlist %}
               <tr>
-                <td>{{ patient.mobile_number }}</td>
+                <td>{{ patient.ip_number }}</td>
                 <td>{{ patient.Rating }}</td>
                 <td>{{ patient.sandf }}</td>
                 <td>{{ patient.department }}</td>
                 <td>{{ patient.AreaofIssue }}</td>
                 <td>
-               <a href="{% url 'change' patient.mobile_number %}" class="btn btn-success btn-icon-split">
+                  <a href="{% url 'details' patient.id %}" class="btn btn-success btn-icon-split">
+                       <span class="icon text-white-50">
+                         <i class="fas fa-check"></i>
+                       </span>
+                       <span class="text">View</span>
+                   </a>
+                </td>
+                <td>
+               <a href="{% url 'change' patient.id %}" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                       <i class="fas fa-check"></i>
                     </span>
@@ -58,11 +68,11 @@ OUTPatient Issues
                 </a>
                 </td>
                 <td>
-                  <a href="{% url 'forward' patient.mobile_number %}" class="btn btn-danger btn-icon-split">
+                  <a href="{% url 'forward' patient.id %}" class="btn btn-danger btn-icon-split">
                        <span class="icon text-white-50">
                          <i class="fas fa-check"></i>
                        </span>
-                       <span class="text">Click</span>
+                       <span class="text">Forward</span>
                    </a>
                    </td>
               </tr>
